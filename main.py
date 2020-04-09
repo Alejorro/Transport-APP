@@ -20,10 +20,4 @@ def pool(vehicle):
     output = createPool(vehicle, value=value)
     return dumps(output)
 
-@app.route('/principales/<apartados>')
-def variables(apartados):
-    value = request.args.get('value')
-    output = createPool(apartados, value=value)
-    return dumps(output)
-
 app.run("0.0.0.0", 4500, debug=True)
