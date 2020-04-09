@@ -17,7 +17,13 @@ def index():
 @app.route('/pool/<vehicle>')
 def pool(vehicle):
     value = request.args.get('value')
-    output = createPool(vehicle, value=value)
+    output = createVar(vehicle, value=value)
+    return dumps(output)
+
+@app.route('/disp/<vehicle>')
+def disp(vehicle):
+    value = request.args.get('value')
+    output = createVar(vehicle, value=value, tipo="Disposición")
     return dumps(output)
 
 app.run("0.0.0.0", 4500, debug=True)
