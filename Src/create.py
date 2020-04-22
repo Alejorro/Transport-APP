@@ -3,25 +3,35 @@
 from Src.mongoThings import *
 from Src.locate import *
 
-def createVar(*vehicle, value=0, tipo="Pool"):
-    vehicle = [element.capitalize() for element in vehicle[0].split(",")]
+def createVar(*creation, value=0, tipo="Hora_Pool", method = "variables"):
+    vehicle = [element.capitalize() for element in creation[0].split(",")]
+    print(vehicle)
     db = pickDB()
-    selectID = locateID()
+    selectID = locateID(method=method, tipo=tipo)
 
-    vehicleDefined = ["Ranchera", "Turismo", "Minibus", "Diafana"]
+    if "Pool" in tipo:
+        vehicleDefined = ["Ranchera", "Turismo", "Minibus", "Diafana"]
+    elif "Disposicion" in tipo:
+        vehicleDefined = ["Ranchera", "Turismo", "Minibus", "Diafana", "Diafanavest"]
+    elif tipo =="Basico":
+        vehicleDefined = ["Vale", "Exterior", "Extras"]
+    elif tipo =="Km_extras":
+        vehicleDefined = ["Turismo", "Minibus", "Diafana"]
+    elif tipo =="Dieta":
+        vehicleDefined = ["Completa", "Reducida"]
 
     for element in vehicle:
-
-        print(vehicle)
         if element in vehicleDefined:
-            checkDuplicated = locateDuplicated(element, method="variables",tipo=tipo)
-            position = locateIndex(tipo, element)
-
-
+            checkDuplicated = locateDuplicated(element, method=method,tipo=tipo)
+            position = locateIndex(tipo, element, method=method)
             if checkDuplicated == True:
                 db.update({"_id":selectID}, {"$set":{f"{tipo}.{position}.{element}":value}})
             elif checkDuplicated == False:
                 db.update({"_id":selectID}, {"$addToSet":{f"{tipo}":{element:value}}})
-
+        if element not in vehicleDefined:
+            return f"No ha sido introducido: {element}"
     return "OK"
+
+
+
 
