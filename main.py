@@ -41,7 +41,7 @@ def kmVar(vehicle):
 @app.route('/var/dieta/<element>')
 def dietVar(element):
     value = request.args.get('value')
-    output = createVar(element, value=value, tipo="Dieta")
+    output = createVar(element, vehicle, value=value, tipo="Dieta")
     return dumps(output)
 
 @app.route('/pool/jorn/<vehicle>')
