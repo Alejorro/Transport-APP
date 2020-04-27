@@ -1,8 +1,13 @@
 
+#Importación de librerías
+import datetime
+
 #Importación de módulos
 from Src.mongoThings import *
 from Src.locate import *
+from Src.errorHandling import *
 
+#Función de creación de variables principales
 def createVar(*creation, value=0, tipo="Hora_Pool", method = "variables"):
     vehicle = [element.capitalize() for element in creation[0].split(",")]
     print(vehicle)
@@ -31,6 +36,13 @@ def createVar(*creation, value=0, tipo="Hora_Pool", method = "variables"):
         if element not in vehicleDefined:
             return f"No ha sido introducido: {element}"
     return "OK"
+
+#Función introductora
+def createIntro():
+    date = dateIntro()
+    return date
+
+
 
 
 

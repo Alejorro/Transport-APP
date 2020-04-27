@@ -56,4 +56,12 @@ def poolDisp(vehicle):
     output = createVar(vehicle, value=value, tipo="Jornada_Disposicion")
     return dumps(output)
 
+@app.route('/intro')
+def introDay():
+    output = createIntro()
+
+
+
+
+
 app.run("0.0.0.0", 4500, debug=True)
