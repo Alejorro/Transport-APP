@@ -37,12 +37,18 @@ def createVar(*creation, value=0, tipo="Hora_Pool", method = "variables"):
             return f"No ha sido introducido: {element}"
     return "OK"
 
-#Función introductora
-def createIntro():
-    date = dateIntro()
-    return date
+#Función creadora de días:
 
-
+def createDays(month):
+    
+    if month in ["Enero","Marzo","Mayo","Julio","Agosto","Octubre","Diciembre"]:
+        result = list(range(1,31))
+    elif month in ["Abril","Junio","Septiembre","Noviembre"]:
+        result = list(range(1,30))
+    elif month == "Febrero":
+        result = list(range(1,29))
+        
+    return result
 
 
 
